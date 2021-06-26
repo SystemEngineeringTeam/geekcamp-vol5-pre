@@ -1,8 +1,9 @@
 import Vuex from 'vuex'
+import axios from 'axios'
 
 const createStore = () => {
   return new Vuex.Store({
-    state: () => ({
+    state: {
       tasks: [
         {
           id: 1,
@@ -17,13 +18,13 @@ const createStore = () => {
           deadline: '2021-07-10',
         },
       ],
-    }),
-    actions: () => ({
+    },
+    actions: {
       getTask(context) {
         this.$axios
-          .get('http://localhost:8083/task')
+          .get('/tasks')
           .then((res) => {
-            console.log(res)
+            console.log(res.data)
             context.state.tasks = res.data
           })
           .catch((er) => {
@@ -33,7 +34,7 @@ const createStore = () => {
       },
       postTask(context, task) {
         axios
-          .post('http://localhost:8083/task', {
+          .post('/task', {
             detail: task.detail,
             deadline: task.deadline,
           })
@@ -48,6 +49,7 @@ const createStore = () => {
             taskID: context.taskID,
           })
           .then((res) => {
+            console.log(res)
             console.log('Ok')
           })
           .catch((er) => {
@@ -55,7 +57,7 @@ const createStore = () => {
             console.log(er)
           })
       },
-    }),
+    },
   })
 }
 export default createStore

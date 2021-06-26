@@ -46,7 +46,7 @@
     <v-row>
       <v-col>
         <ul>
-          <li v-for="task in tasks" :key="task.id">
+          <li v-for="task in $store.state.tasks" :key="task.id">
             {{ task.detail }}
           </li>
         </ul>
@@ -82,6 +82,10 @@ export default {
       menu2: false,
     }
   },
+  created() {
+    this.get()
+    console.log("create")
+  },
   methods: {
     taskAdd() {
       // const today = new Date(
@@ -93,6 +97,9 @@ export default {
       this.$store.dispatch('postTask', task)
       // console.log(today)
       // console.log(this.date)
+    },
+    get() {
+      this.$store.dispatch('getTask')
     },
   },
 }
