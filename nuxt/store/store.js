@@ -24,9 +24,7 @@ const createStore = () => {
           .get('http://localhost:8083/task')
           .then((res) => {
             console.log(res)
-            res.forEach((element) => {
-              context.tasks.push(element)
-            })
+            context.state.tasks = res.data
           })
           .catch((er) => {
             console.log('error')
@@ -42,6 +40,19 @@ const createStore = () => {
           .then((res) => {
             console.log(res.data)
             console.log(context.state.tasks)
+          })
+      },
+      putTask(context, task) {
+        this.$axios
+          .put('http://localhost:8083/task', {
+            taskID: context.taskID,
+          })
+          .then((res) => {
+            console.log('Ok')
+          })
+          .catch((er) => {
+            console.log('error')
+            console.log(er)
           })
       },
     }),
