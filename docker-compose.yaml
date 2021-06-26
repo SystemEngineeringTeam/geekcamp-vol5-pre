@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   backend:
-    build: ./backend
+    build: ./go
     tty: true
     ports:
       - "8083:80"
@@ -13,5 +13,5 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root-pw
       MYSQL_DATABASE: todo
-      MYSQL_USER: ferris
+      MYSQL_USER: gopher
       MYSQL_PASSWORD: ferris-pw
