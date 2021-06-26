@@ -10,8 +10,37 @@
           clearable
         ></v-text-field>
       </v-col>
+      <v-col cols="2">
+        <v-menu
+          ref="menu"
+          v-model="menu"
+          :close-on-content-click="false"
+          :return-value.sync="date"
+          transition="scale-transition"
+          offset-y
+          min-width="auto"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date"
+              label="締め切り日を入力してね"
+              prepend-icon="mdi-calendar"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="date" no-title scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+            <v-btn text color="primary" @click="$refs.menu.save(date)">
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+      </v-col>
       <v-col cols="4">
-        <v-btn elevation="2">登録</v-btn>
+        <v-btn elevation="2" @click="taskAdd()">登録</v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -45,11 +74,25 @@ export default {
           deadline: '2021-07-10',
         },
       ],
+      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
+      menu: false,
+      modal: false,
+      menu2: false,
     }
   },
   methods: {
     taskAdd() {
-      tasks.push(this.taskName)
+      // const today = new Date(
+      //   Date.now() - new Date().getTimezoneOffset() * 60000
+      // )
+      //   .toISOString()
+      //   .substr(0, 10)
+      const task = { detail: this.taskName, deadline: this.date }
+      this.$store.dispatch('postTask', task)
+      // console.log(today)
+      // console.log(this.date)
     },
   },
 }
