@@ -1,0 +1,13 @@
+use todo;
+
+CREATE TABLE `tasks` (
+	`id` SERIAL PRIMARY KEY,
+	`message` VARCHAR(255) NOT NULL COMMENT 'Task Content',
+	`dateID` INT NOT NULL UNIQUE,
+    FOREIGN KEY(id) REFERENCES dates(id)
+);
+CREATE TABLE `dates` (
+	`id` SERIAL,
+	`date` DATE NOT NULL,
+	`deadline` DATE NOT NULL,
+);
