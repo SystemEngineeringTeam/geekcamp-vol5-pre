@@ -33,6 +33,14 @@ const createStore = () => {
             console.log(er)
           })
       },
+      postTask(context, task) {
+        axios.post('http://localhost:8083/task', {
+          "detail": task.detail,
+          "deadline": task.deadline,
+        }).then(res => {
+          console.log(res.data)
+        })
+      }
     }),
   })
 }
