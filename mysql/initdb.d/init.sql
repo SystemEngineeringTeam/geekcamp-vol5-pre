@@ -3,7 +3,7 @@ use todo;
 CREATE TABLE `dates` (
 	`id` SERIAL,
 	`date` DATE NOT NULL,
-	`deadline` DATE NOT NULL,
+	`deadline` DATE NOT NULL
 );
 
 CREATE TABLE `tasks` (
