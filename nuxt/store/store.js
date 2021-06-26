@@ -19,13 +19,13 @@ const createStore = () => {
       ],
     }),
     actions: () => ({
-      getTask(content) {
+      getTask(context) {
         this.$axios
           .get('http://localhost:8083/task')
           .then((res) => {
             console.log(res)
             res.forEach((element) => {
-              content.tasks.push(element)
+              context.tasks.push(element)
             })
           })
           .catch((er) => {
@@ -34,13 +34,16 @@ const createStore = () => {
           })
       },
       postTask(context, task) {
-        axios.post('http://localhost:8083/task', {
-          "detail": task.detail,
-          "deadline": task.deadline,
-        }).then(res => {
-          console.log(res.data)
-        })
-      }
+        axios
+          .post('http://localhost:8083/task', {
+            detail: task.detail,
+            deadline: task.deadline,
+          })
+          .then((res) => {
+            console.log(res.data)
+            console.log(context.state.tasks)
+          })
+      },
     }),
   })
 }
