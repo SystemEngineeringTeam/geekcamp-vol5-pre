@@ -1,6 +1,6 @@
 <template>
-  <div class="text-center">
-    <v-dialog v-model="dialog" width="400px">
+  <div class="text-center mr-0 mr-0">
+    <v-dialog v-model="dialog" width="350px">
       <template #activator="{ on, attrs }">
         <v-btn
           color="red lighten-2"
@@ -15,10 +15,10 @@
       <v-card height="350px" style="position: relative">
         <v-card-title class="text-h5 grey lighten-2 primary--text">
         </v-card-title>
-        <v-row>
-          <v-card-text style="relative">
+        <v-row class="mr-0 pr-0">
+          <v-card-text style="relative" class="mr-0 pr-0">
             <v-form>
-              <v-col cols="8">
+              <v-col cols="8" class="mr-0 pr-0">
                 タスク名{{ detail }}
                 <v-text-field
                   v-model="detail"
@@ -28,7 +28,7 @@
               </v-col>
               <v-col cols="9" class="justify-center">
                 締め切り{{ deadline }}
-                <v-text-field v-model="deadline" single-line>
+                <v-text-field v-model="deadline" single-line solo>
                   <template #append-outer>
                     <Date v-model="deadline"></Date>
                   </template>
