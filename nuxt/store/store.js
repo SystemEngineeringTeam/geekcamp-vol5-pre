@@ -12,13 +12,27 @@ const createStore = () => {
         },
         {
           id: 2,
-          date: '2021-06-10',
+          date: '2021-06-07',
           detail: '映像処理課題',
-          deadline: '2021-07-10',
+          deadline: '2021-07-20',
         },
       ]
     }),
+    mutations: () => ({
+      addTask(state, task) {
+        state.tasks.push(task)
+      }
+    }),
+    actions: () => ({
+      postTask(context, task) {
+        axios.post('http://localhost:8083/task', {
+          "detail": task.detail,
+          "deadline": task.deadline,
+        }).then(res => {
+          console.log(res.data)
+        })
+      }
+    }),
   })
 }
-
 export default createStore;
