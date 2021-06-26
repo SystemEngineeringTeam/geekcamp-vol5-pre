@@ -1,4 +1,4 @@
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -12,18 +12,27 @@ const createStore = () => {
         },
         {
           id: 2,
-          date: '2021-06-07',
+          date: '2021-06-10',
           detail: '映像処理課題',
-          deadline: '2021-07-20',
+          deadline: '2021-07-10',
         },
-      ]
-    }),
-    mutations: () => ({
-      addTask(state, task) {
-        state.tasks.push(task)
-      }
+      ],
     }),
     actions: () => ({
+      getTask(content) {
+        this.$axios
+          .get('http://localhost:8083/task')
+          .then((res) => {
+            console.log(res)
+            res.forEach((element) => {
+              content.tasks.push(element)
+            })
+          })
+          .catch((er) => {
+            console.log('error')
+            console.log(er)
+          })
+      },
       postTask(context, task) {
         axios.post('http://localhost:8083/task', {
           "detail": task.detail,
@@ -35,4 +44,4 @@ const createStore = () => {
     }),
   })
 }
-export default createStore;
+export default createStore
