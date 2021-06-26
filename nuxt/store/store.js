@@ -1,4 +1,4 @@
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -16,9 +16,25 @@ const createStore = () => {
           detail: '映像処理課題',
           deadline: '2021-07-10',
         },
-      ]
+      ],
+    }),
+    actions: () => ({
+      getTask(content) {
+        this.$axios
+          .get('http://localhost:8083/task')
+          .then((res) => {
+            console.log(res)
+            res.forEach((element) => {
+              content.tasks.push(element)
+            })
+          })
+          .catch((er) => {
+            console.log('error')
+            console.log(er)
+          })
+      },
     }),
   })
 }
 
-export default createStore;
+export default createStore

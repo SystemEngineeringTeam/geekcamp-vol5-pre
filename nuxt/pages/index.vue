@@ -3,8 +3,8 @@
     <v-row justify="center" align="center">
       <v-col cols="4" sm="8" md="6">
         <v-text-field
-          class="text-field"
           v-model="taskName"
+          class="text-field"
           solo
           label="やることを入力してね"
           clearable
@@ -51,7 +51,7 @@ export default {
     taskAdd() {
       tasks.push(this.taskName)
     },
-  }
+  },
 }
 </script>
 
