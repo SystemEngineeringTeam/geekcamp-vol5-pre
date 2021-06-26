@@ -51,6 +51,7 @@ export default {
     taskAdd() {
       tasks.push(this.taskName)
     },
+
   },
 }
 </script>
