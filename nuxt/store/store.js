@@ -42,10 +42,10 @@ const createStore = () => {
             console.log(context.state.tasks)
           })
       },
-      putTask(context, task) {
+      putTask(task) {
         this.$axios
           .put('http://localhost:8083/task', {
-            taskID: context.taskID,
+            taskID: task.taskID,
           })
           .then((res) => {
             console.log('Ok')

@@ -2,13 +2,7 @@
   <v-container>
     <v-row justify="center" align="center">
       <v-col cols="4" sm="8" md="6">
-        <v-text-field
-          v-model="taskName"
-          class="text-field"
-          solo
-          label="やることを入力してね"
-          clearable
-        ></v-text-field>
+        <AddTasks class="text-field"></AddTasks>
       </v-col>
       <v-col cols="2">
         <v-menu
@@ -20,16 +14,6 @@
           offset-y
           min-width="auto"
         >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="date"
-              label="締め切り日を入力してね"
-              prepend-icon="mdi-calendar"
-              readonly
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </template>
           <v-date-picker v-model="date" no-title scrollable>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
@@ -39,17 +23,16 @@
           </v-date-picker>
         </v-menu>
       </v-col>
-      <v-col cols="4">
-        <v-btn elevation="2" @click="taskAdd()">登録</v-btn>
-      </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <ul>
-          <li v-for="task in tasks" :key="task.id">
-            {{ task.detail }}
-          </li>
-        </ul>
+        <v-card v-for="task in tasks" :key="task.id" class="task-card">
+          <v-card-title>{{ task.detail }} </v-card-title>
+          <v-card-subtitle>締め切り {{ task.deadline }}</v-card-subtitle>
+          <v-card-actions>
+            <v-btn color="indigo"> 完了 </v-btn>
+          </v-card-actions>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -101,5 +84,8 @@ export default {
 <style scoped>
 .text-field {
   margin-top: 30px;
+}
+.task-card {
+  margin: 10px;
 }
 </style>
