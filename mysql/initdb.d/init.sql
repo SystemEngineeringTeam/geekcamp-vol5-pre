@@ -6,6 +6,7 @@ CREATE TABLE `tasks` (
 	`dateID` INT NOT NULL UNIQUE,
     FOREIGN KEY(id) REFERENCES dates(id)
 );
+
 CREATE TABLE `dates` (
 	`id` SERIAL,
 	`date` DATE NOT NULL,
