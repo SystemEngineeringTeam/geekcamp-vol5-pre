@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"github.com/SystemEngineeringTeam/geekcamp-vol5-pre/apifuncs"
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	fmt.Println("Hello,World")
+	engine := gin.Default()
+	engine.GET("/task", apifuncs.GetTask)
+	engine.POST("/task", apifuncs.PostTask)
+	engine.PUT("/task", apifuncs.PutTask)
+	engine.Run(":80")
 }
